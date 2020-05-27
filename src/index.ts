@@ -1,4 +1,3 @@
-// export public api from here
-// for example:
-// export * from './decorators';
-export * from './test';
+import { KeycloakProviderService } from './keycloak-provider.service';
+
+export { KeycloakProviderService };
