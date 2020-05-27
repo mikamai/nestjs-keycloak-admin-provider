@@ -37,7 +37,11 @@ export class KeycloakProviderService {
 
   async initConnection() {
     try {
-      await this.client.auth({...this.connectionConfig, grantType: this.connectionConfig.grant_type, grant_type: undefined});
+      await this.client.auth({
+        ...this.connectionConfig,
+        grantType: this.connectionConfig.grant_type,
+        grant_type: undefined,
+      });
       const keycloakIssuer = await Issuer.discover(this.authConfig.jwtIssuer);
       this.issuerClient = new keycloakIssuer.Client({
         client_id: this.realmConfig.clientId,
