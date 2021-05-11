@@ -3,17 +3,25 @@ import { Logger } from '@nestjs/common';
 import KcAdminClient from 'keycloak-admin';
 import { Issuer, TokenSet } from 'openid-client';
 
+interface RealmConfig {
+  baseUrl: string;
+  realmName: string;
+  clientId: string;
+  clientSecret: string;
+}
+
+interface AuthConfig {
+  jwtIssuer: string;
+}
+
 export class KeycloakProviderService {
-  private realmConfig: any;
-  private authConfig: any;
   private client: KcAdminClient;
   private logger: Logger;
   private tokenSet: TokenSet;
   private issuerClient: any;
   private connectionConfig: any;
 
-  constructor(realmConfig: any, authConfig: any, logLabel: string) {
-    this.realmConfig = realmConfig;
+  constructor(private realmConfig: RealmConfig, private authConfig: AuthConfig, logLabel: string) {
     this.authConfig = authConfig;
 
     this.logger = new Logger(logLabel);
@@ -31,8 +39,6 @@ export class KeycloakProviderService {
       password: '',
     };
     this.initConnection();
-
-    return this;
   }
 
   async initConnection() {
