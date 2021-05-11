@@ -6,9 +6,19 @@ import { KeycloakProviderService } from './keycloak-provider.service';
 import KeycloakAdminClient from 'keycloak-admin';
 import { Issuer } from 'openid-client';
 
+class FakeClient {
+  grant() {
+    return [];
+  }
+}
+
 describe('Keycloak provider', () => {
+
   let service: KeycloakProviderService;
   let client: KeycloakAdminClient;
+  const fakeIssuer = {
+    Client: FakeClient,
+  };
   const realmConfig = {
     baseUrl: 'http://baseUrl',
     realmName: 'testRealm',
@@ -23,6 +33,8 @@ describe('Keycloak provider', () => {
   };
 
   beforeEach(() => {
+
+    Issuer.discover = jest.fn().mockReturnValueOnce(fakeIssuer);
     jest.useFakeTimers();
     service = new KeycloakProviderService(realmConfig, authConfig, 'TESTLOG');
     client = service.getClient();
