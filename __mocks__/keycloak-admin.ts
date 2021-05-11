@@ -1,5 +1,5 @@
-import KcAdminClient from 'keycloak-admin';
+/* import KcAdminClient from 'keycloak-admin';
 
 jest.genMockFromModule('keycloak-admin');
 
-export default KcAdminClient;
+export default KcAdminClient; */

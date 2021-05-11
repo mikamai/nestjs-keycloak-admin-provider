@@ -1,22 +1,19 @@
-import OpenIdClient, { TokenSet, Client } from 'openid-client';
+import { Issuer } from 'openid-client';
 
-class FakeClient {
+/* class FakeClient {
   grant(): TokenSet {
     return new TokenSet({
-      access_token: '123123123',
+      access_token: '123123124',
       token_type: 'Bearer',
-      id_token: '1231231232',
-      refresh_token: '123123123213',
+      id_token: '1231231233',
+      refresh_token: '123123123214',
       scope: 'a,b,c',
-      expires_at: 123123123123,
+      expires_at: 123123123124,
       session_state: 'string',
     });
   }
-}
+} */
 
 // tslint:disable-next-line: max-classes-per-file
-const FakeIssuer = new Issuer();
 
-OpenIdClient.Issuer = FakeIssuer;
-
-export default OpenIdClient;
+export default {Issuer};
